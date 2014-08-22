@@ -4,3 +4,5 @@
  *          dakidaki
  *          jewsdidwtc
  */
+
+const char *pomf_upload_file(const char *file);

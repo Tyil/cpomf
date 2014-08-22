@@ -11,6 +11,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include "cpomf.h"
+#include "pomf.c"
 
 /**
  * main
@@ -23,56 +24,28 @@ int main(int argc, char **argv)
 	int c;
 	char *file = NULL;
 
-	// Make booleans for all the special outputs
-	int pVersion = 0;
-	int pLicense = 0;
-	int pCredits = 0;
-
 	while ((c = getopt(argc, argv, "clf:v")) != -1) {
 		switch (c) {
 			case 'c':
-				pCredits = 1;
+				printf("%s\n", read_file("CREDITS"));
+				return 0;
 				break;
 			case 'l':
-				pLicense = 1;
+				printf("%s", read_file("LICENSE"));
+				return 0;
 				break;
 			case 'f':
-				file = optarg;
+				upload_file(optarg);
 				break;
 			case 'v':
-				pVersion = 1;
+				printf("%s\n", version());
+				return 0;
 				break;
 		}
 	}
-
-	// Show the license if requested
-	if (pLicense == 1) {
-		printf("%s", readfile("LICENSE"));
-		return 0;
-	}
-
-	// Show the version if requested
-	if (pVersion == 1) {
-		printf("%s\n", version());
-		return 0;
-	}
-
-	// Show the credits if requested
-	if (pCredits == 1) {
-		printf("%s\n", readfile("CREDITS"));
-		return 0;
-	}
-
-	// Upload a file if given
-	if (file == NULL) {
-		printf("No file given for upload.\n");
-		return 1;
-	}
-
-	return 0;
 }
 
-const char *readfile(const char *file)
+const char *read_file(const char *file)
 {
 	char *buffer = 0;
 	long length;
@@ -95,6 +68,21 @@ const char *readfile(const char *file)
 	fclose(f);
 
 	return buffer;
+}
+
+void upload_file(const char *file)
+{
+	const char *url;
+
+	// Attempt to upload the file and get an URL back
+	url = pomf_upload_file(file);
+
+	// If NULL was returned, the upload failed
+	if (url == NULL) {
+		printf("Upload of file %s failed!\n", file);
+	} else {
+		printf("File '%s' uploaded to %s\n", file, url);
+	}
 }
 
 const char *version()
