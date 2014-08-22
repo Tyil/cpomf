@@ -8,27 +8,27 @@
  */
 
 #include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
 #include "cpomf.h"
-#include "pomf.h"
 
 /**
  * main
  *
  * @returns int
  */
-int main(int argc, char const* argv[])
+int main(int argc, char **argv)
 {
 	// Create variables for getopts
 	int c;
 	char *file = NULL;
-	char *optarg = NULL;
 
 	// Make booleans for all the special outputs
 	int pVersion = 0;
 	int pLicense = 0;
 	int pCredits = 0;
 
-	while ((c = getopt(argc, argv, "clfv")) != -1) {
+	while ((c = getopt(argc, argv, "clf:v")) != -1) {
 		switch (c) {
 			case 'c':
 				pCredits = 1;
