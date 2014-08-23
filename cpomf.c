@@ -8,8 +8,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+
+#include "pomf.h"
 #include "cpomf.h"
-#include "pomf.c"
+
+#define MAX_LINE 1024
 
 /**
  * main
@@ -70,7 +73,7 @@ const char *read_file(const char *file)
 
 void upload_file(const char *file)
 {
-	char *url[80];
+	char url[MAX_LINE] = {0};
 
 	// Attempt to upload the file and get an URL back
 	pomf_upload_file(file, *url);

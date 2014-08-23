@@ -32,9 +32,6 @@ void pomf_upload_file(const char *file, char *url)
 	// Attempt to open the file
 	fd = fopen(file, "rb");
 
-	// NULLify url
-	url = NULL;
-
 	// File couldn't be opened
 	if (!fd) {
 		fprintf(stderr, "fopen(%s) failed", file);
