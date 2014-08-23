@@ -54,8 +54,8 @@ const char *read_file(const char *file)
 	FILE *f = fopen(file, "r");
 
 	if (f == NULL) {
-		sprintf("The %s file does not exist.\n", file, buffer);
-		return buffer;
+		fprintf(stderr, "The file '%s' doesn't exist.\n");
+		return "";
 	}
 
 	fseek(f, 0, SEEK_END);
