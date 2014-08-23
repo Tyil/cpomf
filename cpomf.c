@@ -26,11 +26,14 @@ int main(int argc, char **argv)
 	int c;
 	char *file = NULL;
 
-	while ((c = getopt(argc, argv, "chlf:v")) != -1) {
+	while ((c = getopt(argc, argv, "cf:hlv")) != -1) {
 		switch (c) {
 			case 'c':
 				printf("%s\n", read_file("CREDITS"));
 				return 0;
+				break;
+			case 'f':
+				upload_file(optarg);
 				break;
 			case 'h':
 				printf("%s\n", read_file("README"));
@@ -39,9 +42,6 @@ int main(int argc, char **argv)
 			case 'l':
 				printf("%s", read_file("LICENSE"));
 				return 0;
-				break;
-			case 'f':
-				upload_file(optarg);
 				break;
 			case 'v':
 				printf("%s\n", version());
@@ -82,9 +82,9 @@ void upload_file(const char *file)
 
 	// Attempt to upload the file and get an URL back
 	if(pomf_upload_file(file, url) == 0) {
-		printf("File '%s' uploaded to '%s'.\n", file, url);
+		printf("%s\t%s\n", file, url);
 	} else {
-		printf("Upload of file '%s' failed!\n", file);
+		printf("%s\tFAILED\n\n", file);
 	}
 }
 

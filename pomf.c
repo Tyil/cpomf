@@ -24,7 +24,7 @@ int pomf_upload_file(const char *file, char *url)
 	// fileinfo declarations
 	struct stat fileInfo;
 	FILE *fd;
-	struct string s;
+	struct pomf_cb_struct s;
 
 	// jansson JSON parser declarations
 	json_t *jsonRoot, *jsonFiles, *jsonArray, *jsonUrl;
@@ -66,11 +66,11 @@ int pomf_upload_file(const char *file, char *url)
 	curl_easy_setopt(curl, CURLOPT_HTTPPOST, post);
 	curl_easy_setopt(curl, CURLOPT_MAXREDIRS, 50L);
 	curl_easy_setopt(curl, CURLOPT_TCP_KEEPALIVE, 1L);
-	curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, writefunc);
+	curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, pomf_cb_func);
 	curl_easy_setopt(curl, CURLOPT_WRITEDATA, &s);
 
 	// Init the HTTP response string
-	init_string(&s);
+	pomf_cb_init(&s);
 
 	// Send the cURL request
 	curlResponse = curl_easy_perform(curl);
@@ -99,7 +99,7 @@ int pomf_upload_file(const char *file, char *url)
 	return 0;
 }
 
-void init_string(struct string *s) {
+void pomf_cb_init(struct pomf_cb_struct *s) {
 	s->len = 0;
 	s->ptr = malloc(s->len+1);
 
@@ -111,7 +111,7 @@ void init_string(struct string *s) {
 	s->ptr[0] = '\0';
 }
 
-size_t writefunc(void *ptr, size_t size, size_t nmemb, struct string *s)
+size_t pomf_cb_func(void *ptr, size_t size, size_t nmemb, struct pomf_cb_struct *s)
 {
 	size_t new_len = s->len + size*nmemb;
 	s->ptr = realloc(s->ptr, new_len+1);
