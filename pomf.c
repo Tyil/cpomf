@@ -10,6 +10,7 @@
 #include <sys/stat.h>
 #include <string.h>
 #include <fcntl.h>
+
 #include "pomf.h"
 
 void pomf_upload_file(const char *file, char *url)
@@ -91,8 +92,8 @@ void pomf_upload_file(const char *file, char *url)
 	curl_easy_cleanup(curl);
 
 	// Create the url
-	strcpy(url, "https://a.pomf.se/");
-	/* strcat(url, json_string_value(jsonUrl)); */
+	strcpy(url, "http://a.pomf.se/");
+	strcat(url, json_string_value(jsonUrl));
 }
 
 void init_string(struct string *s) {

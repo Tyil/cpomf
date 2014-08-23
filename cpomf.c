@@ -3,6 +3,7 @@
  *
  * License: Modified BSD License
  * Authors: Patrick "Tyil" Spek <p.spek@tyil.nl>
+ *          inuoppai
  */
 
 #include <stdio.h>
@@ -80,13 +81,13 @@ void upload_file(const char *file)
 
 	// If NULL was returned, the upload failed
 	if (url == NULL) {
-		printf("Upload of file %s failed!\n", file);
+		printf("Upload of file '%s' failed!\n", file);
 	} else {
-		printf("File '%s' uploaded to %s\n", file, url);
+		printf("File '%s' uploaded to '%s'.\n", file, url);
 	}
 }
 
 const char *version()
 {
-	return "cpomf, version 0.0.1";
+	return "cpomf, version 0.1.0";
 }

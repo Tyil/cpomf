@@ -1,7 +1,9 @@
 /**
  * License: Modified BSD License
  * Authors: Patrick "Tyil" Spek <p.spek@tyil.nl>
+ *          inuoppai
  */
+
 #ifndef _POMF_H
 #define _POMF_H
 
