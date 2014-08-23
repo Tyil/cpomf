@@ -59,10 +59,8 @@ void pomf_upload_file(const char *file, char *url)
 		CURLFORM_CONTENTTYPE, "application/octet-stream",
 		CURLFORM_END);
 	curl_easy_setopt(curl, CURLOPT_URL, "http://pomf.se/upload.php");
-	//curl_easy_setopt(curl, CURLOPT_UPLOAD, 1L);
 	curl_easy_setopt(curl, CURLOPT_READDATA, fd);
 	curl_easy_setopt(curl, CURLOPT_INFILESIZE_LARGE, (curl_off_t)fileInfo.st_size);
-	//curl_easy_setopt(curl, CURLOPT_VERBOSE, 1L);
 	curl_easy_setopt(curl, CURLOPT_HTTPPOST, post);
 	curl_easy_setopt(curl, CURLOPT_MAXREDIRS, 50L);
 	curl_easy_setopt(curl, CURLOPT_TCP_KEEPALIVE, 1L);
@@ -99,10 +97,12 @@ void pomf_upload_file(const char *file, char *url)
 void init_string(struct string *s) {
 	s->len = 0;
 	s->ptr = malloc(s->len+1);
+
 	if (s->ptr == NULL) {
 		fprintf(stderr, "malloc() failed\n");
 		exit(EXIT_FAILURE);
 	}
+
 	s->ptr[0] = '\0';
 }
 
@@ -110,10 +110,12 @@ size_t writefunc(void *ptr, size_t size, size_t nmemb, struct string *s)
 {
 	size_t new_len = s->len + size*nmemb;
 	s->ptr = realloc(s->ptr, new_len+1);
+
 	if (s->ptr == NULL) {
 		fprintf(stderr, "realloc() failed\n");
 		exit(EXIT_FAILURE);
 	}
+
 	memcpy(s->ptr+s->len, ptr, size*nmemb);
 	s->ptr[new_len] = '\0';
 	s->len = new_len;
