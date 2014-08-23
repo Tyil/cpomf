@@ -41,6 +41,7 @@ int pomf_upload_file(const char *file, char *url)
 
 	// Attempt to read filesize
 	if (fstat(fileno(fd), &fileInfo) != 0) {
+		fprintf(stderr, "fstat(fileno(%s)) failed\n", file);
 		return 2;
 	}
 
@@ -49,6 +50,7 @@ int pomf_upload_file(const char *file, char *url)
 
 	// Check if the cURL session created succesfully
 	if (curl == NULL) {
+		fprintf(stderr, "curl_easy_init() failed\n");
 		return 3;
 	}
 
@@ -76,6 +78,7 @@ int pomf_upload_file(const char *file, char *url)
 	// Check if we got a positive response
 	if (curlResponse != CURLE_OK) {
 		free(s.ptr);
+		fprintf(stderr, "curl_easy_perform() failed\n");
 		return 4;
 	}
 
