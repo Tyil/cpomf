@@ -13,7 +13,7 @@
 
 #include "pomf.h"
 
-void pomf_upload_file(const char *file, char *url)
+int pomf_upload_file(const char *file, char *url)
 {
 	// cURL declarations
 	CURL *curl;
@@ -36,12 +36,12 @@ void pomf_upload_file(const char *file, char *url)
 	// File couldn't be opened
 	if (!fd) {
 		fprintf(stderr, "fopen(%s) failed", file);
-		return;
+		return 1;
 	}
 
 	// Attempt to read filesize
 	if (fstat(fileno(fd), &fileInfo) != 0) {
-		return;
+		return 2;
 	}
 
 	// Initialize the cURL session
@@ -49,7 +49,7 @@ void pomf_upload_file(const char *file, char *url)
 
 	// Check if the cURL session created succesfully
 	if (curl == NULL) {
-		return;
+		return 3;
 	}
 
 	// Set cURL options
@@ -76,7 +76,7 @@ void pomf_upload_file(const char *file, char *url)
 	// Check if we got a positive response
 	if (curlResponse != CURLE_OK) {
 		free(s.ptr);
-		return;
+		return 4;
 	}
 
 	// Parse the JSON response
@@ -92,6 +92,8 @@ void pomf_upload_file(const char *file, char *url)
 	// Create the url
 	strcpy(url, "http://a.pomf.se/");
 	strcat(url, json_string_value(jsonUrl));
+
+	return 0;
 }
 
 void init_string(struct string *s) {

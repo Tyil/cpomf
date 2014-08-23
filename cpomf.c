@@ -81,13 +81,10 @@ void upload_file(const char *file)
 	char url[MAX_LINE] = {0};
 
 	// Attempt to upload the file and get an URL back
-	pomf_upload_file(file, url);
-
-	// If NULL was returned, the upload failed
-	if (url == NULL) {
-		printf("Upload of file '%s' failed!\n", file);
-	} else {
+	if(pomf_upload_file(file, url) == 0) {
 		printf("File '%s' uploaded to '%s'.\n", file, url);
+	} else {
+		printf("Upload of file '%s' failed!\n", file);
 	}
 }
 
