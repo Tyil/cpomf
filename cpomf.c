@@ -26,10 +26,14 @@ int main(int argc, char **argv)
 	int c;
 	char *file = NULL;
 
-	while ((c = getopt(argc, argv, "clf:v")) != -1) {
+	while ((c = getopt(argc, argv, "chlf:v")) != -1) {
 		switch (c) {
 			case 'c':
 				printf("%s\n", read_file("CREDITS"));
+				return 0;
+				break;
+			case 'h':
+				printf("%s\n", read_file("README"));
 				return 0;
 				break;
 			case 'l':
@@ -54,7 +58,7 @@ const char *read_file(const char *file)
 	FILE *f = fopen(file, "r");
 
 	if (f == NULL) {
-		fprintf(stderr, "The file '%s' doesn't exist.\n");
+		fprintf(stderr, "The file '%s' doesn't exist.\n", file);
 		return "";
 	}
 
