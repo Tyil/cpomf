@@ -76,7 +76,7 @@ void upload_file(const char *file)
 	char url[MAX_LINE] = {0};
 
 	// Attempt to upload the file and get an URL back
-	pomf_upload_file(file, *url);
+	pomf_upload_file(file, url);
 
 	// If NULL was returned, the upload failed
 	if (url == NULL) {
