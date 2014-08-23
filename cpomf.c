@@ -70,10 +70,10 @@ const char *read_file(const char *file)
 
 void upload_file(const char *file)
 {
-	const char *url;
+	char *url[80];
 
 	// Attempt to upload the file and get an URL back
-	url = pomf_upload_file(file);
+	pomf_upload_file(file, *url);
 
 	// If NULL was returned, the upload failed
 	if (url == NULL) {
