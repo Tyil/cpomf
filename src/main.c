@@ -8,10 +8,10 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <unistd.h>
+#include <getopt.h>
 
 #include "pomf.h"
-#include "cpomf.h"
+#include "main.h"
 
 #define MAX_LINE 1024
 
@@ -36,7 +36,7 @@ int main(int argc, char **argv)
 				upload_file(optarg);
 				break;
 			case 'h':
-				printf("%s\n", read_file("README"));
+				printf("%s\n", read_file("README.md"));
 				return 0;
 				break;
 			case 'l':
