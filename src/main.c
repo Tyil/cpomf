@@ -104,5 +104,5 @@ void upload_file(const char *file)
 
 const char *version()
 {
-	return "cpomf, version 1.0.0";
+	return "cpomf, version 1.0.1";
 }
