@@ -1,6 +1,7 @@
 INSTALL_PATH=/home/$$USER/.local
 
-CFLAGS=-std=c99 -ggdb -Wall
+DEBUGFLAGS=-ggdb -Wall
+CFLAGS=-std=c99
 LDFLAGS=-lcurl -ljansson
 DFLAGS=-DINSTALL_PATH="$(INSTALL_PATH)"
 
@@ -10,7 +11,7 @@ clean:
 
 debug:
 	mkdir -p bin
-	$(CC) src/*.c -o bin/cpomf $(CFLAGS) $(LDFLAGS)
+	$(CC) src/*.c -o bin/cpomf $(CFLAGS) $(DEBUGFLAGS) $(LDFLAGS)
 	mkdir -p share/cpomf
 	cp {CREDITS,LICENSE,README.md} share/cpomf/.
 
