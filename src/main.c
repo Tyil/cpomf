@@ -9,11 +9,16 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <getopt.h>
+#include <string.h>
 
 #include "pomf.h"
 #include "main.h"
 
 #define MAX_LINE 1024
+
+#ifndef INSTALL_PATH
+	#define INSTALL_PATH "."
+#endif
 
 /**
  * main
@@ -54,11 +59,21 @@ int main(int argc, char **argv)
 const char *read_file(const char *file)
 {
 	char *buffer = 0;
+	char fp[MAX_LINE];
 	long length;
-	FILE *f = fopen(file, "r");
+	FILE *f;
 
+	// Set the filepath
+	strcpy(fp, INSTALL_PATH);
+	strcat(fp, "/share/cpomf/");
+	strcat(fp, file);
+
+	// Attempt to open the file
+	f = fopen(fp, "r");
+
+	// Check if opening succeeded
 	if (f == NULL) {
-		fprintf(stderr, "The file '%s' doesn't exist.\n", file);
+		fprintf(stderr, "The file '%s' doesn't exist.\n", fp);
 		return "";
 	}
 
