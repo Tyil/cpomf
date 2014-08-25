@@ -10,7 +10,7 @@ Show the CREDITS file.
 Upload the given file. You can use multiple `-f file` flags to upload multiple files at once.
 
 ### -h
-Show the HELP file.
+Show the [README.me](https://github.com/scriptkitties/cpomf/blob/master/README.md) file.
 
 ### -l
 Show the license attached to the project.
@@ -19,7 +19,7 @@ Show the license attached to the project.
 Show the current version of your cpomf build.
 
 ## Credits
-See the attached CREDITS file.
+See the attached [CREDITS](https://github.com/scriptkitties/cpomf/blob/master/CREDITS) file.
 
 ## License
-Modified BSD License. See the LICENSE file for the complete license.
+Modified BSD License. See the [LICENSE](https://github.com/scriptkitties/cpomf/blob/master/LICENSE) file for the complete license.
