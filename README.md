@@ -1,5 +1,4 @@
 # cpomf
-=====
 ## About
 cpomf is a command line utility to upload files to pomf.se, written in C.
 
@@ -8,7 +7,7 @@ cpomf is a command line utility to upload files to pomf.se, written in C.
 Show the CREDITS file.
 
 ### -f _file_
-Upload the given file. You can use multiple `-f _file_` flags to upload multiple files at once.
+Upload the given file. You can use multiple `-f file` flags to upload multiple files at once.
 
 ### -h
 Show the HELP file.
