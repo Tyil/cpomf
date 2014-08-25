@@ -2,6 +2,10 @@
 ## About
 cpomf is a command line utility to upload files to pomf.se, written in C.
 
+## Installation
+Run `make && sudo make install && make clean` to install cpomf into `/usr/local`.
+A different directory can be set by editing the `INSTALL_PATH` in the `Makefile`.
+
 ## Options
 ### -c
 Show the CREDITS file.
