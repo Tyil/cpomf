@@ -29,7 +29,6 @@ int main(int argc, char **argv)
 {
 	// Create variables for getopts
 	int c;
-	char *file = NULL;
 
 	while ((c = getopt(argc, argv, "cf:hlv")) != -1) {
 		switch (c) {
