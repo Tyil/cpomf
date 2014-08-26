@@ -1,9 +1,9 @@
 INSTALL_PATH=/usr/local
 
 DEBUGFLAGS=-ggdb -Wall
-CFLAGS=-std=c99
+CFLAGS=-std=c11
 LDFLAGS=-lcurl -ljansson
-DIP=-DINSTALL_PATH=\"$(INSTALL_PATH)\"
+DIP=-DINSTALL_PATH=\"$(INSTALL_PATH)\" -D_POSIX_SOURCE
 
 build:
 	mkdir -p bin
