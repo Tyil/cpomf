@@ -3,13 +3,14 @@
  * Authors: Patrick "Tyil" Spek <p.spek@tyil.nl>
  */
 
+#include <fcntl.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+#include <sys/stat.h>
+
 #include <curl/curl.h>
 #include <jansson.h>
-#include <sys/stat.h>
-#include <string.h>
-#include <fcntl.h>
 
 #include "pomf.h"
 
@@ -40,7 +41,7 @@ int pomf_upload_file(const char *file, char *url)
 	}
 
 	// Attempt to read filesize
-	if (fstat(fileno(fd), &fileInfo) != 0) {
+	if (fstat(fileno(fd), &fileInfo)) {
 		fprintf(stderr, "fstat(fileno(%s)) failed\n", file);
 		return 2;
 	}
